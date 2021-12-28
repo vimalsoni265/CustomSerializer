@@ -40,5 +40,29 @@ namespace CustomSerializer.Test
             };
             Assert.That(Serizalizer.Serialize(classB), Is.EqualTo("AABB"));
         }
+
+        [Test]
+        public void CheckThat_Serializer_Should_Format_Properties_With_DefaultFormatter_If_NoneDefined()
+        {
+            var classC = new ClassC()
+            {
+                Property1 = "AA",
+                Property2 = 25.36
+            };
+            Assert.That(Serizalizer.Serialize(classC), Is.EqualTo("AA25.36"));
+        }
+
+        [Test]
+        public void CheckThat_Serializer_Should_Serialized_Properties_In_Defined_Order()
+        {
+            var DateTime = new DateTime(2021, 12, 28, 10, 0, 0, 0);
+            var classD = new ClassD()
+            {
+                Property1 = "AA",
+                Property2 = 25.36,
+                Property3 = DateTime
+            };
+            Assert.That(Serizalizer.Serialize(classD), Is.EqualTo("2021122825.36AA"));
+        }
     }
 }
